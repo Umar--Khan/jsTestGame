@@ -8,7 +8,7 @@ let horizon
 let obstacles = []
 
 
-function setup () {
+function setup() {
     createCanvas(600, 200)
     reset()
 
@@ -21,7 +21,7 @@ function setup () {
     // onGround = false
 }
 
-function reset () {
+function reset() {
 
     textAlign(CENTER)
 
@@ -32,14 +32,14 @@ function reset () {
     onGround = false
 }
 
-function mousePressed(){
+function mousePressed() {
     if (keyIsDown(32)) {
         reset()
     }
 }
 
 
-function draw () {
+function draw() {
     background(51)
 
     // draw horizon
@@ -63,7 +63,7 @@ function draw () {
     score++
     noStroke()
     textSize(20)
-    text("Score: " + score, width/2, 30)
+    text("Score: " + score, width / 2, 30)
 
     // newObs()
     updateObstacles()
@@ -71,18 +71,18 @@ function draw () {
 
 }
 
-function updateObstacles(){
+function updateObstacles() {
 
-    for (let i = obstacles.length-1; i >= 0; i--){
+    for (let i = obstacles.length - 1; i >= 0; i--) {
         obstacles[i].x -= speed
         let x = obstacles[i].x
         let size = obstacles[i].size
-        let s2 = size/2
+        let s2 = size / 2
 
-        if (x > -30){
+        if (x > -30) {
             // if its On Screen
             fill(obstacles[i].color)
-            rect(x, horizon - size, size , size)
+            rect(x, horizon - size, size, size)
             let x1 = x + s2
             let y1 = horizon - s2
 
@@ -91,13 +91,13 @@ function updateObstacles(){
                 // noStroke()
                 // fill(255)
                 textSize(40)
-                text("Game Over", width/2, height/2)
+                text("Game Over", width / 2, height / 2)
                 textSize(20)
-                text("Press F5 to restart", width/2, height/2 + 20)
-            
+                text("Press F5 to restart", width / 2, height / 2 + 20)
+
                 noLoop()
             }
-        } else{
+        } else {
             // Delete from Array
             obstacles.splice(i, 1)
         }
@@ -105,16 +105,16 @@ function updateObstacles(){
 }
 
 
-function newObstacle(n){
+function newObstacle(n) {
     let obs = new Obstacle(n * 50, color(random(255), random(255), random(255)))
     obstacles.push(obs)
 }
 
-function handleTRex(){
+function handleTRex() {
 
     if (y + 20 + yVel < horizon) {
         // console.log('flag')
-        yVel += map(frameCount, 0 , 3600, 0.7, 2)
+        yVel += map(frameCount, 0, 3600, 0.7, 2)
         onGround = false
     } else {
         yVel = 0
@@ -123,9 +123,9 @@ function handleTRex(){
 
 
     if (mouseIsPressed || keyIsDown(UP_ARROW) || keyIsDown(32)) {
-        
-        if (onGround){
-            yVel -= map(frameCount, 0 , 3600, 11, 15)
+
+        if (onGround) {
+            yVel -= map(frameCount, 0, 3600, 11, 15)
             // console.log(yVel)
             onGround = false
         }
